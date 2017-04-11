@@ -35,12 +35,13 @@ public class fourutwop {
     public static void sendFile(String[] args) {
 
         try {
-            // Getting the destination address and port
-            String destAddress = args[1].toString();
-            String destPort = args[2].toString();
+            // Getting the destination address, port and file
+            String filePath = args[1];
+            String destAddress = args[2];
+            int destPort = Integer.parseInt(args[3]);
 
             // Checking that they both exist
-            if (!destAddress.isEmpty() && !destPort.isEmpty()) {
+            if (!destAddress.isEmpty() && !filePath.isEmpty()) {
                 // Both are provided
                 System.out.println(destAddress);
             } else {
@@ -61,15 +62,10 @@ public class fourutwop {
         // Adding a try/catch so it doesn't die
         try {
             // Getting the port
-            String port = args[1].toString();
+            int port = Integer.parseInt(args[1]);
 
             // Checking the port was passed
-            if (!port.isEmpty()) {
-                System.out.println(port);
-            } else {
-                // Port was not passed
-                System.out.println("You must provide a port for the server to listen on!");
-            }
+            System.out.println(port);
 
         } catch (ArrayIndexOutOfBoundsException aoob) {
             // Throwing an error if no parameters were passed
