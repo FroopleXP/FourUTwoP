@@ -63,9 +63,9 @@ public class fourutwop {
         try {
             // Getting the port
             int port = Integer.parseInt(args[1]);
-
-            // Checking the port was passed
-            System.out.println(port);
+            // Firing up a new server
+            fourutwopServer newServer = new fourutwopServer(port);
+            newServer.start();
 
         } catch (ArrayIndexOutOfBoundsException aoob) {
             // Throwing an error if no parameters were passed
