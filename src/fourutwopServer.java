@@ -1,6 +1,7 @@
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.Buffer;
 
 /**
  * Created by conno on 11/04/2017.
@@ -38,6 +39,37 @@ public class fourutwopServer extends Thread {
                 Socket connectedClient = serverSocket.accept();
                 // We have a connection!
                 System.out.println("New connected from: " + connectedClient.getRemoteSocketAddress());
+
+                // Creating a new buffered input to receive the data
+                File recFile = new File("newFile.txt");
+                FileOutputStream newFileStream = new FileOutputStream(recFile);
+                BufferedOutputStream toNewFile = new BufferedOutputStream(newFileStream);
+
+                // To receive the data
+                BufferedInputStream fromFile = new BufferedInputStream(connectedClient.getInputStream());
+
+                try {
+                    // Reading in the new file
+                    while (true) { // As of yet we don't know how big the file is!
+                        // Getting the first byte
+                        int dataFromFile = fromFile.read();
+                        // Checking that we have actually read the data
+                        if (dataFromFile > 0) {
+                            // We have data!
+                            toNewFile.write(dataFromFile);
+                        } else {
+                            // We don't have data!
+                            break;
+                        }
+                    }
+
+                } finally {
+                    // Closing the file
+                    toNewFile.close();
+                    // Closing connection to client
+                    connectedClient.close();
+                }
+
             } catch (IOException e) {
                 // Catching errors
                 System.out.println(e.toString());
