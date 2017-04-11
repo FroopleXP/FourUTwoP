@@ -1,3 +1,5 @@
+import java.net.Socket;
+
 /**
  * Created by conno on 11/04/2017.
  */
@@ -42,8 +44,11 @@ public class fourutwop {
 
             // Checking that they both exist
             if (!destAddress.isEmpty() && !filePath.isEmpty()) {
-                // Both are provided
-                System.out.println(destAddress);
+                // Both are provided, create a new client
+                fourutwopClient newClient = new fourutwopClient(destAddress, destPort);
+                // Sending the flie
+                newClient.sendFile(filePath);
+
             } else {
                 // They were not present
                 System.out.println("You must provide both a destination address and port");

@@ -13,7 +13,7 @@ public class fourutwopClient {
     private String remoteAddress;
     private Socket clientSocket;
 
-    Socket fourutwopClient(String remoteAddress, int remotePort) {
+    fourutwopClient(String remoteAddress, int remotePort) {
 
         // Setting up the new client
         this.remoteAddress = remoteAddress;
@@ -28,13 +28,12 @@ public class fourutwopClient {
             System.out.println(e.toString());
         }
 
-        // Returning the object
-        return this.clientSocket;
-
     }
 
     // Used to actually send the file
-    public void sendFile(Socket client, String fileDirectory) {
+    public void sendFile(String fileDirectory) {
+
+        Socket client = this.clientSocket;
 
         try {
             // Opening the file
