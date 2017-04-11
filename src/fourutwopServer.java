@@ -64,8 +64,9 @@ public class fourutwopServer extends Thread {
                     }
 
                 } finally {
-                    // Closing the file
+                    // Closing the streams
                     toNewFile.close();
+                    fromFile.close();
                     // Closing connection to client
                     connectedClient.close();
                 }
