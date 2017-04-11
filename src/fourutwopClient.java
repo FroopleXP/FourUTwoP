@@ -22,6 +22,7 @@ public class fourutwopClient {
         try {
             // Creating a new client, if no error is thrown, we're connected!
             this.clientSocket = new Socket(this.remoteAddress, this.remotePort);
+            System.out.println("Connected to server!");
 
         } catch (IOException e) {
             // Catching errors
@@ -50,20 +51,28 @@ public class fourutwopClient {
                 int fileSize = (int)fileToSend.length();
                 int bytesRead = 0;
 
+                // Sending the file
+                System.out.println("Sending the file...");
+
                 while (bytesRead < fileSize) {
                     // Reading in byte at a time
                     int byteRead = fileBuff.read();
                     // Writing to the server
                     outBuff.write(byteRead);
                     // Increasing the amount read
-                    bytesRead = byteRead;
+                    bytesRead++;
                 }
 
             } finally {
                 // When all is done, close streams and connection to server
                 fileBuff.close();
                 outBuff.close();
+                System.out.println("File sent.");
+
+                // Closing connection to remote server
                 client.close();
+                System.out.println("Closed connection to remote server.");
+
             }
 
         } catch (IOException e) {
